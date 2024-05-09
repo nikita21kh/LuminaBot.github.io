@@ -1,0 +1,168 @@
+
+<html>
+<head>
+
+  <style>
+    body {
+      background: linear-gradient(#000010, #000000);
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+    .container{
+      max-width: 290px;
+      max-height: 400px;
+      margin:0 auto;
+    }
+
+
+    .circle {
+      width: 200px;
+      height: 200px;
+      border: 1px solid #FFD166;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      background: linear-gradient(#FFFF00, #FFD166);
+    }
+
+    #counter {
+      font-size: calc(20px + 2vmin);
+      font-weight: bold;
+      color: #FFFF00;
+    }
+
+    #letter {
+      font-size: calc(150px + 4vmin);
+      font-weight: bold;
+      background: linear-gradient(#000000, hsl(59, 100%, 50%));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    h2 {
+      font-size: calc(30px + 2vmin);
+      font-weight: bold;
+      color: linear-gradient(#ffffff, #00ff62);
+      font-family: 'Raleway';
+      margin-top: 20px;
+    }
+
+    .progress-bar {
+      width: 300px;
+      height: 20px;
+      background:linear-gradient(#444447, #444447);
+      margin: 20px auto;
+    }
+
+    .progress-bar-inner {
+      width: 300px;
+      height: 100%;
+      background: linear-gradient(#FFFF00, #00ff62);
+    }
+    #reverse-counter {
+      font-size: calc(8px + 2vmin);
+      font-weight: bold;
+      color: #FFFF00;
+    }
+
+    @media screen and (max-width: 480px) {
+      #counter {
+        font-size: 20px;
+      }
+
+      #letter {
+        font-size: 100px;
+      }
+
+      h2 {
+        font-size: 30px;
+      }
+
+      .progress-bar {
+        width: 300px;
+        height: 10px;
+      }
+
+      .progress-bar-inner {
+        width: 300px;
+        height: 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class = "container">
+    <br>
+    <br>
+    <span id="counter">0</span>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="circle">
+      <h1 id="letter">L</h1>
+    </div>
+
+    <h4 style="color: #FFFFFF">Lumina</h4>
+    <br>
+    <br>
+    <div class="progress-bar">
+      <div class="progress-bar-inner"></div>
+    </div>
+    <br>
+    <span id="reverse-counter">150</span>
+  </div>
+    <script>
+      // Получаем элементы счетчика, прогресс-бара и обратного счетчика
+      const counterElement = document.getElementById("counter");
+      const progressBarInnerElement = document.querySelector(".progress-bar-inner");
+      const reverseCounterElement = document.getElementById("reverse-counter");
+
+      // Переменная для отслеживания прогресса
+      let progress = 300;
+
+      // Добавляем прослушиватель событий click к элементу h1
+      document.getElementById("letter").addEventListener("click", function() {
+        // Увеличиваем счетчик
+        let counter = parseInt(counterElement.innerHTML);
+
+        // Увеличиваем счетчик только если прогресс-бар не равен нулю
+        if (progress > 0) {
+          counter++;
+          counterElement.innerHTML = counter;
+        }
+
+        // Уменьшаем прогресс-бар
+        progress -= 2;
+        progressBarInnerElement.style.width = progress + "px";
+
+        // Проверяем, достиг ли прогресс-бар нуля
+        if (progress <= 0) {
+          // Если да, отключаем кнопку и показываем сообщение
+          this.disabled = true;
+          setTimeout(function() {
+            progress = 300;
+            progressBarInnerElement.style.width = progress + "px";
+            this.disabled = false;
+          }, 30000);
+        }
+
+        // Уменьшаем обратный счетчик
+
+let reverseCounter = parseInt(reverseCounterElement.innerHTML);
+        reverseCounter--;
+        reverseCounterElement.innerHTML = reverseCounter;
+      });
+    </script>
+
+
+</body>
+</html>
